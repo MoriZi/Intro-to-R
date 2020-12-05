@@ -1,0 +1,419 @@
+---
+title: "Intro to Basic R"
+output: html_document
+---
+
+```{=html}
+<style type="text/css">
+
+body{ /* Normal  */
+      font-size: 24px;
+  }
+td {  /* Table  */
+  font-size: 8px;
+}
+h1.title {
+  font-size: 38px;
+  color: DarkRed;
+}
+h1 { /* Header 1 */
+  font-size: 28px;
+  color: DarkBlue;
+}
+h2 { /* Header 2 */
+    font-size: 22px;
+  color: DarkBlue;
+}
+h3 { /* Header 3 */
+  font-size: 22px;
+  font-family: "Times New Roman", Times, serif;
+  color: DarkBlue;
+}
+code.r{ /* Code block */
+    font-size: 24px;
+}
+pre { /* Code block - determines code spacing between lines */
+    font-size: 24px;
+}
+</style>
+```
+
+------------------------------------------------------------------------
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Learning Objectives
+
+\
+In this lesson, we will go over the followings:
+
+-   What is R and Why R? 
+
+-   RStudio IDE
+
+-   Basics
+
+    -   Commands, assignments, and objects
+
+    -   Code, data, and file organization
+
+    -   Getting help and use help
+
+    -   loops, if statements
+
+-   Writing the good code
+
+![](images/Capture.jpg){width="1000" height="10"}
+
+# What is R and Why R?  
+
+-   "it consists of a language plus a run-time environment with graphics, a debugger, access to certain system functions, and the ability to run programs stored in script files " 
+
+-   Developed in 1992 by Ross Ihaka and Robert Gentleman at the University of Auckland  
+
+-   In top-3 programming languages for data science
+
+    -   R was **ranked \#1** in the KDnuggets 2014 poll on Top Languages for analytics
+
+-   Using R:
+
+    -   New users should work with the integrated development environment (IDE) called RStudio
+
+![](images/Capture.jpg){width="1000" height="10"}
+
+# The RStudio IDE
+
+![](images/RStudio.png) Create a New Project -- Step 1
+
+![](images/RStudio2.png)
+
+## Create a New Project -- Step 2
+
+# ![](images/RStudio3.png)
+
+![](images/RStudio4.png)
+
+# Working with console:
+
+The basic approach to using R interactively is to type a command and hit Enter  
+
+```{r}
+10 - 6
+```
+
+The result that R returns, 4, has as [1] at the left side of the line. This number simply indicates the position of the adjacent element in the output{this will make more sense later when the output has more elements
+
+-   Multi-line commands, an R console will display a "continuation symbol" +  
+
+```{r}
+ 10 - 
++ 6
+
+```
+
+hit Enter before typing the 6 
+
+The continuation character indicates that R is waiting for something  
+
+To see what is contained within a symbolic variable, type its name  
+
+```{r}
+x <- 10
+x
+```
+
+-   Recall a previous command in an R console by hitting the up arrow on your keyboard
+
+-   When you give R an assignment, such as the one above, the object referred to as x is stored in your workspace
+
+    -   ls(): list all the objects in the your workspace
+
+    -   rm(x): remove the object from your workspace
+
+    -   rm (list=ls()) : what does this do? 
+
+-   **R is a case-sensitive language**
+
+-   If you are stuck in a bad command in the console, just hit the **Esc**
+
+# The RStudio IDE  with script editor
+
+\
+![](images/RStudio5.png)
+
+## RStudio
+
+-   It is now much more than a script editor, and includes tools for building packages and writing dynamic reports, among others 
+
+-   The lower left window is the console by default  
+
+-   You can click within it and interact directly with R  
+
+-   If your code is worth writing, it is probably worth saving
+
+-   Don't write it in the console, write it in a R script file.
+
+-   You can then repeat the same analysis in the future
+
+![](images/Capture.jpg){width="1000" height="10"}
+
+**Comments**: create a comment with the comment character \#  
+
+```{r}
+# Notes from Day 1 of Intro to R
+# M. Zihayat
+# you can use ctrl+shift+C to comment a line
+```
+
+**Working directory:** Tells R where to look for files that are to be read in, and where to write files.
+
+-   When you create a project, it is set to your project folder by default
+
+Two ways to set it:
+
+-   Session menu
+
+-   Commands:
+
+    ```{r}
+    getwd() #tells you the current directory
+    setwd('C:/Users/Morteza/Documents/RStudio/Intro to R - Day 1')#set the current directory
+    ```
+
+    ## Run a script in RStudio
+
+    **CTRL + Enter** Run current line or selection 
+
+    **CTRL + Shift + Enter** Run all lines
+
+![](images/Capture.jpg){width="1000" height="10"}
+
+## Commands, assignment, and objects  
+
+-   The R language is a mix of functional and object-oriented style  
+
+-   Most (technically all) of the operations carried out in R are done by calling up functions, e.g., sqrt(10) will calculate the square root of 10  
+
+-   The variables you create and work with in R are called **objects**  
+
+-   Objects are really anything that can be assigned to a symbolic variable; data structures (e.g., a matrix) and functions (e.g., sqrt) are examples of objects  
+
+-   Many functions in R operate differently on different types of objects  
+
+![](images/Capture.jpg){width="1000" height="10"}
+
+## Operators
+
+```{r}
+10^3.5 + 87*3.2 - 1000/18
+```
+
+## Relational operators: ==, !=, \<, \>, \<=, \>= 
+
+```{r}
+a <- 50
+a >= 100
+```
+
+## Default Functions
+
+-   The central computation in R is a function call  
+
+-   Functions require arguments, which are the objects that the function should act upon and other instructions for the function
+
+```{r}
+sqrt(10)
+```
+
+you can bring up the help page for any function by typing ? followed by the function name
+
+    ?sqrt
+
+## Mathematical functions
+
+![](https://lh3.googleusercontent.com/czO35b13zuNG6-6vfDefa9gmNpngIKtWMhyyr1TJNV78k1MRSvGL03GowitB6vSwOyQwzbGlr8fbEGJiS0VWtwRr9nV6XhlxtLfjiAvXyOvtDpvf5wzhymXmq7E3OqUnSyaMVhQ-mHA)
+
+```{r}
+x <- pi/2 + 0.2
+a <- sin(x)
+b <- round(a, 2)
+
+```
+
+Or
+
+```{r}
+ round(sin(pi/2 + 0.2), 2) 
+```
+
+Generic functions
+
+The functions with general name while their functionality changes with respect to the input parameters.
+
+```{r}
+ plot(1:10)
+```
+
+```{r}
+plot(sin)
+```
+
+see all the functionalities:
+
+```{r}
+methods(plot)
+
+```
+
+![](images/Capture.jpg){width="1000" height="10"}
+
+## **Common R Functions and Control Flow**
+
+![](images/control.png)
+
+**`if… else` Statements**\
+
+    if (test_expression) {
+    statement1
+    } else {
+    statement2
+    }
+
+```{r}
+if (50 < 30){
+    print("50 < 30.")
+}else{
+    print("50 >= 30.")
+    print("The else code block was run instead of the first block.")
+}
+
+print('---')
+print('These two lines are not indented, so they are always run next.')
+```
+
+## **`for` Loops**
+
+-   One of the primary purposes of using a programming language is to automate repetitive tasks. One example is the `for` loop.
+
+-   The `for` loop allows you to perform a task repeatedly on every element within an object, such as every name in a list.
+
+![](images/for.png)
+
+Let's say we wanted to print each of the names in the list, as well as "is Awesome!" In this case, we'd create a temporary variable for each element in the collection (`for name in names` would put each name, in sequence, under the temporary variable `name`) and then do something with it.
+
+```{r}
+names <- c('Rebecca Bunch', 'Paula Proctor', 'Heather Davis')
+
+for (val in names) {
+  print(val)  
+}
+```
+
+![](images/Capture.jpg){width="1000" height="10"}
+
+# Working with add-on packages  
+
+-   While the base packages include many useful functions, for specialized procedures you may need content from add-on packages.
+
+-   CRAN website <http://cran.r-project.org/> currently lists more than 4000 add-on packages 
+
+        install.packages("dplyr")
+
+load a package
+
+```{r}
+library("dplyr")
+```
+
+## The tidyverse packages
+
+-   One of the most important of these is dplyr, which is designed for data manipulation
+
+-   The dplyr package and 11 others that share some approaches to programming are collectively referred to as the tidyverse, or tidyverse packages\
+    The most important of these packages are:\
+    • **dplyr**, for data manipulation\
+    • **magrittr**, which defines the forward pipe operator\
+    • **ggplot2**, which can be used to make sophisticated plots without much effort\
+    • **lubridate**, for working with dates and times\
+    • **tibble**, which defines a new type of data frame\
+    • **readr**, for reading in data from text files\
+    • **readxl**, for reading data from Excel files\
+    • **tidyr**, for reshaping data frames to make "tidy" data
+
+-   These packages are great
+
+-   the syntax of these packages is not completely consistent with base R
+
+-   the functions are not always consistent with other functions
+
+        install.packages("tidyverse")
+
+    ```{r}
+    library(tidyverse)
+    ```
+
+    ![](images/Capture.jpg){width="1000" height="10"}
+
+    ## Writing good code  
+
+-   Good codes bring reusability:
+
+    -   Include comments in your scripts
+
+    -   Use spaces between object names, operators, and constants
+
+    -   Indent code in order to see clearly what belongs where
+
+    -   Stick with lowercase object and column names
+
+    -   Use blank lines to separate blocks of code
+
+    ## ![](images/goodCode.png)
+
+    Data organization  
+
+    1\. Header rows are only present at the top of the file
+
+    2\. Each column contains a single variable
+
+    3\. Each row contains a single observation
+
+    4\. Each file (or worksheet) contains a single block of data
+
+    ## ![](images/badData.png)
+
+    File organization and workflow  
+
+-   It is very easy to make a mess of file organization  
+
+-   We want to get to an answer quickly  
+
+-   Each project, should have a separate folder containing all project files  
+
+-   One suggestion: 
+
+    ![](images/directory.png)
+
+-   The "scripts" directory contains all R scripts 
+
+-   "figs" and "output" contain graphical and other output.
+
+-   The "intermediate" directory is used for intermediate data sets that need to be saved. 
+
+-   Automate every step:
+
+    -   Try to avoid any data processing in Excel  
+
+## Getting help  
+
+-   CRAN website (<http://cran.r-project.org/manuals.html>  
+
+-   Frequently Asked Questions on CRAN (<http://cran.r-project.>org/faqs.html) answers a lot of basic questions  
+
+-   R site search" ([http://finzi.psych.upenn.edu/search.html)](http://finzi.psych.upenn.edu/search.html))  
+
+-   Mailing lists:
+
+    -   You can sign up for any of the lists here: <http://www.r-project.org/mail.html.> Before posting a question, be sure to search the mailing list archives, and check the posting guide (<http://www.r-project.org/posting-guide>.html).
