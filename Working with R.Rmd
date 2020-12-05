@@ -69,32 +69,47 @@ knitr::opts_chunk$set(echo = TRUE)
 
     -   Numeric:
 
-            x <- 10.2
-            x
+        ```{r}
+
+        x <- 10.2
+        x
+        ```
 
     -   Integer:
 
-            y <- 1:5
-            y
+        ```{r}
+        y <- 1:5
+        y
+        ```
 
     -   Character
 
-            name <- "Johnny Appleseed"
-            name
+        ```{r}
+
+        name <- "Johnny Appleseed"
+        name
+        ```
 
     -   Logical.
 
-            a <- TRUE
-            a
+        ```{r}
+        a <- TRUE
+        a
+        ```
 
     -   How about ?
 
-            name <- Johnny
+        ```{r}
+
+        #name <- Johnny
+        ```
 
 How to identify data type?
 
-    class(x)
-    mode(x)
+```{r}
+class(x)
+mode(x)
+```
 
 ![](images/Capture.jpg){width="1000" height="10"}
 

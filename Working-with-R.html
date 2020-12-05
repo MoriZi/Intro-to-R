@@ -847,10 +847,10 @@ mass &lt;- rnorm(4, mean = 50)</code></pre>
 <pre class="r"><code>df &lt;- data.frame(id = group, mean = mass)
 df</code></pre>
 <pre><code>##   id     mean
-## 1  A 49.70709
-## 2  B 50.05638
-## 3  C 50.19244
-## 4  D 49.88907</code></pre>
+## 1  A 47.63730
+## 2  B 50.57163
+## 3  C 50.41832
+## 4  D 50.31445</code></pre>
 <ul>
 <li><p>Name of the columns:</p>
 <pre class="r"><code>names(df)</code></pre>
@@ -862,10 +862,10 @@ df</code></pre>
 <pre class="r"><code>names(df) &lt;- c(&quot;date&quot;, &quot;mass&quot;)
 df</code></pre>
 <pre><code>##   date     mass
-## 1    A 49.70709
-## 2    B 50.05638
-## 3    C 50.19244
-## 4    D 49.88907</code></pre></li>
+## 1    A 47.63730
+## 2    B 50.57163
+## 3    C 50.41832
+## 4    D 50.31445</code></pre></li>
 </ul>
 <p><img src="data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAABNUAAAArCAYAAABfAb5oAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGYSURBVHhe7dw9TgJRGIZR1iIkFmyRsXNPbmN2wJ+aWFgYAyRk5pJc6Pne/hRnE0/xLMZxbNM8AQAAAABFPapd5wYAAAAAFPWoNs8TAAAAAFB0j2rTBQAAAAAouj/V2h8AAAAAUNSj2u/HOwAAAABQ1KPaz9saAAAAACjqUe1/eAUAAAAAinpUO29WAAAAAEBRj2qn4QUAAAAAKHpEtSUAAAAAUPSIaisAAAAAoEhUAwAAAICQqAYAAAAAIVENAAAAAEKiGgAAAACERDUAAAAACIlqAAAAABAS1QAAAAAgJKoBAAAAQEhUAwAAAICQqAYAAAAAIVENAAAAAEKiGgAAAACERDUAAAAACIlqAAAAABAS1QAAAAAgJKoBAAAAQEhUAwAAAICQqAYAAAAAIVENAAAAAEKiGgAAAACERDUAAAAACIlqAAAAABAS1QAAAAAgJKoBAAAAQEhUAwAAAICQqAYAAAAAIVENAAAAAEKiGgAAAACERDUAAAAACPWoBgAAAADULY5f321//Gzb/aHtAAAAAIAnDu0G1GSKK/kYKDUAAAAASUVORK5CYII=" width="1000" height="10" /></p>
 </div>
@@ -7410,9 +7410,9 @@ filter(titanic, Embarked %in% c(&quot;C&quot;, &quot;S&quot;))</code></pre>
 <p>For a single vector, this is done with the function sort</p>
 <pre class="r"><code>x &lt;- rnorm(5)
 x</code></pre>
-<pre><code>## [1] -1.4729716 -0.2302403 -0.1886625 -1.4066423  0.2173246</code></pre>
+<pre><code>## [1]  0.16820660 -2.29677900  0.31929154 -0.07912457 -0.39825304</code></pre>
 <pre class="r"><code>sort(x)</code></pre>
-<pre><code>## [1] -1.4729716 -1.4066423 -0.2302403 -0.1886625  0.2173246</code></pre>
+<pre><code>## [1] -2.29677900 -0.39825304 -0.07912457  0.16820660  0.31929154</code></pre>
 <p>we use ‘order’ function to sort the entire data frame by one column?</p>
 <pre class="r"><code>titanic[order(titanic$Age, titanic$Sex, decreasing = TRUE), ]</code></pre>
 <pre><code>##     PassengerId Survived Pclass
