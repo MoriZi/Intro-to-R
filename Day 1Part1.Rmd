@@ -1,0 +1,445 @@
+---
+title: "Day 1"
+output: html_document
+---
+
+```{=html}
+<style type="text/css">
+
+body{ /* Normal  */
+      font-size: 24px;
+  }
+td {  /* Table  */
+  font-size: 8px;
+}
+h1.title {
+  font-size: 38px;
+  color: DarkRed;
+}
+h1 { /* Header 1 */
+  font-size: 28px;
+  color: DarkBlue;
+}
+h2 { /* Header 2 */
+    font-size: 22px;
+  color: DarkBlue;
+}
+h3 { /* Header 3 */
+  font-size: 22px;
+  font-family: "Times New Roman", Times, serif;
+  color: DarkBlue;
+}
+code.r{ /* Code block */
+    font-size: 24px;
+}
+pre { /* Code block - determines code spacing between lines */
+    font-size: 24px;
+}
+</style>
+```
+
+------------------------------------------------------------------------
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Learning Objectives
+
+\
+In this lesson, we will go over the following:
+
+-   What is Data Science 
+
+-   Data science and the data science workflow
+
+-   Test train split
+
+-   Over/underfitting concepts
+
+-   Data Science Applications
+
+-   Rstudio
+
+![](images/Capture.jpg){width="1000" height="10"}
+
+# Common Questions Asked in Data Science
+
+-   Does X **predict** Y?
+
+-   Are there any **distinct groups** in our data?
+
+-   What are the **key components** of our data?
+
+-   Is one of our observations **"weird"**?
+
+![](images/Capture.jpg){width="1000" height="10"}
+
+# From a business perspective
+
+Data Science can help us with use cases such as:
+
+-   What is the *likelihood* that a customer will buy this product?
+
+-   Is this a *good* or *bad* review?
+
+-   *How much* demand will there be for my service tomorrow?
+
+-   Is this the *cheapest way* to deliver my goods?
+
+-   Is there a better way to *segment* my marketing strategies?
+
+-   What *groups of products* are customers purchasing together?
+
+-   Can we automate this simple yes/no decision?\
+
+![](images/Capture.jpg){width="1000" height="10"}
+
+# Artificial Intelligence vs. Machine Learning vs. Deep Learning
+
+-   Artificial intelligence is an umbrella term that covers machine learning and deep learning
+
+-   Deep learning and neural networks are also types of machine learning algorithms
+
+![](images/AI1.png)
+
+## AI is nothing new!!
+
+![](https://lh3.googleusercontent.com/blap4sMFjq4aJWy6Tl0aD2up74j4YWgtZwWYKcR_EuC77VAKxrTWeDM3RxjivaXn--DUpMxKf3PTp2OIIXlvT1bF2-QOSQDAaXStGyQi8oifR69bFCV0cJWT5ooMPV8D5CXRD-_DO2c)
+
+Why now?
+
+In the last few years there has been a lot of advancements in technologies that enable AI
+
+-   Compute Power
+
+-   Big Data
+
+-   Powerful Algorithms
+
+![](images/AI3.png)
+
+Read more here: <https://www.mckinsey.com/business-functions/mckinsey-analytics/our-insights/an-executives-guide-to-ai>
+
+![](images/Capture.jpg){width="1000" height="10"}
+
+# How Big the data could be?
+
+![](images/bigdata.png)
+
+![](images/Capture.jpg){width="1000" height="10"}
+
+# Why is AI powerful?
+
+## ![](images/housing.png)
+
+![](images/DT.png)
+
+[Demo](http://www.r2d3.us/visual-intro-to-machine-learning-part-1/)
+
+![](images/Capture.jpg){width="1000" height="10"}
+
+## Brain Vs. Computer
+
+![](images/brainComp.png)
+
+\
+
+![](images/Capture.jpg){width="1000" height="10"}
+
+# The Data Science Workflow
+
+-   **Understand the Business Problem:** Develop a hypothesis-driven approach to your analysis.
+
+-   **Data Acquisition and Understanding:** Select, import, explore, and clean your data.
+
+-   **Build a Model:** engineer your data, build models, evaluate them and build the best model.
+
+-   **Deployment:** deploy your model in production and deliver ROI!
+
+![](images/lifecycle.png)
+
+![](images/Capture.jpg){width="1000" height="10"}
+
+# This is what data scientists do
+
+![](images/DSjobs.png)
+
+![](images/Capture.jpg){width="1000" height="10"}
+
+# Step 1. Business Understanding
+
+-   Identify the business/product objectives.
+
+-   Identify and hypothesize goals and criteria for success.
+
+-   Create a set of questions to help you identify the correct data set.
+
+## Use Case
+
+We work for a real estate company interested in using data science to determine the best properties to buy and resell. Specifically, your company would like to identify the characteristics of residential houses that estimate their sale price and the cost-effectiveness of doing renovations
+
+### Objectives
+
+The customer tells us their business goals are to **accurately predict** prices for houses (so that they can sell them for as large a profit as possible) and to identify which **kinds of features** in the housing market would be more likely to lead to foreclosure and other abnormal sales (which could represent more profitable sales for the company).
+
+### Identify and Hypothesize Goals and Criteria for Success
+
+Ultimately, the customer wants us to:
+
+-   Deliver a presentation to the real estate team.
+
+-   Write a business report discussing results, procedures used, and rationales.
+
+-   Build an API that provides estimated returns
+
+### Questions to identify correct data
+
+-   Can you think of questions that would help this customer deliver on their business goals?
+
+-   What sort of features or columns would you want to see in the data?
+
+-   Before going to data acquisition, you can ask questions such as
+
+    -   What would an ideal data set look like?
+
+    -   Describe the dataset that you think would be ideal for this use case
+
+![](images/Capture.jpg){width="1000" height="10"}
+
+# Step 2. Data Acquisition
+
+-   Ideal Data vs. Available Data
+
+-   Oftentimes, we'll start by identifying the ideal data we would want for a project.
+
+-   Then, during the data acquisition phase, we'll learn about the limitations on the types of data actually available.
+
+    -   We have to decide if these limitations will inhibit our ability to answer our question of interest or if we can work with what we have to find a reasonable and reliable answer.
+
+## Example We provide a set of housing data for Ames, Iowa, which includes:
+
+-   20 continuous variables indicating square footage.
+
+<!-- -->
+
+-   14 discrete variables indicating number of each room type.
+
+-   46 categorical variables containing 2--28 classes each, e.g., street type (gravel/paved) and neighborhood (city district name).
+
+    Take a moment to look through the data description. How closely does the set match the ideal data that you envisioned?
+
+    ![](images/housing2.png)
+
+-   **This is possibly the hardest step in the data science workflow**. At this stage, it's common to realize that the problem you're trying to solve may not be solvable with the information available.
+
+-   The data could be incomplete, non-existant, or unable to meet the criteria necessary to answer your question.
+
+    ![](images/Capture.jpg){width="1000" height="10"}
+
+## Data Wrangling & Cleaning
+
+-   This is by far the **most time consuming step** of Data Science Lifecyle
+
+    For the Ames housing dataset we discussed,
+
+    -   What if the data are in different databases and we have to consolidate them?
+
+    -   What if the values for some columns in the dataset are missing or in wrong format?
+
+    ![](images/datawrangling.png)
+
+    They like coockies more than flour (Raw data)
+
+    # ![](images/coockies.png)
+
+![](images/Capture.jpg){width="1000" height="10"}
+
+# Step 3. Modeling
+
+What is a Model?
+
+-   Using Machine Learning algorithms we build a model from input data (image, text, ...)
+
+-   In case of housing data set discussed above we can build a model that learns how to predict price of a house
+
+-   The resulting model is a representative of the data used for training
+
+-   The size of the output model can be alot smaller than the training data
+
+## ![](images/pipeline.png)
+
+Many algorithms that can be used to build a model
+
+## ![](images/algorithms.png)
+
+## How to choose a model?
+
+Depending on the use case, requirements and available data, a model will be selected!
+
+Data scientists use one of these available algorithms and tune it for their use case
+
+-   Most these algorithms are available in public and open source libraries
+
+-   Most data Scientists do no build their own algorithms, they just customize and tune an existing algorithm
+
+## Example:
+
+Given you an idea what you'll learn in this course:
+
+```{r}
+real_state <- read.csv("data/Real estate.csv")
+formula = Y.house.price.of.unit.area~ X2.house.age
+lm_1 <- lm(formula,data=real_state)
+summary(lm_1)
+```
+
+![](images/Capture.jpg){width="1000" height="10"}
+
+## Supervised vs. Unsupervised Learning
+
+There are two main categories of machine learning: supervised learning and unsupervised learning.
+
+**Supervised learning (a.k.a., "predictive modeling"):**
+
+-   Classification and regression
+
+-   Predicts an outcome based on input data.
+
+    -   Example: Predicts whether an email is spam or ham.
+
+-   Attempts to generalize.
+
+-   Requires past data on the element we want to predict (the target).
+
+**Unsupervised learning:**
+
+Clustering and dimensionality reduction
+
+-   Extracts structure from data.
+
+    -   Segmenting grocery store shoppers into "clusters" that exhibit similar behaviors.
+
+-   Attempts to represent.
+
+-   Does not require past data on the element we want to predict.
+
+![](images/supervised.png)
+
+-   Oftentimes, we may combine both types of machine learning in a project to reduce the cost of data collection by learning a better representation. This is referred to as **transfer learning**.
+
+-   Unsupervised learning tends to present more difficult problems because its goals are amorphous. Supervised learning has goals that are almost too clear and can lead people into the trap of optimizing metrics without considering business value.
+
+![](images/Capture.jpg){width="1000" height="10"}
+
+## Feature Engineering
+
+Machine learning algorithms need the data to be engineered before they consume it
+
+![](images/junkin.png)
+
+We need feature engineering to enrich the raw data
+
+Suppose, we want to predict the customers next purchase using a dataset looking like this:
+
+![](images/ex1.png)
+
+How can we enrich this data?
+
+![](images/ex2.png)
+
+\
+Now, the steps to do feature engineering are as follows:
+
+-   Brainstorm features.
+
+-   Create features.
+
+-   Check how the features work with the model.
+
+-   Start again from first until the features work perfectly.
+
+![](images/Capture.jpg){width="1000" height="10"}
+
+# OverFitting and UnderFitting
+
+![](images/overfitting.png)\
+\
+
+-   Finding chance occurrences in data that looks like interesting patterns, but which **do not generalize**, is called **over-fitting the data**
+
+-   We want models to apply **not just to the exact training set but to the general population** from which the training data came
+
+    -   **Generalization**
+
+-   Is green line a good classifier?
+
+-   Is green line **more complex** than the black line?\
+    \
+
+-   Over-fitting is the tendency of data mining procedures to tailor models to the **training data**, at **the expense of generalization** to previously unseen data points
+
+-   All data analytics procedures have the tendency to over-fit to some extent
+
+-   Some more than others:
+
+    -   "If you torture the data long enough, it will confess"
+
+    -   There is **no** single choice or procedure that will eliminate over-fitting, recognize over-fitting, and manage complexity in a principled way!
+
+    -   We always want to find the trend, not fit the line to all the data points.
+
+-   We want the model to learn from the training data, but we don't want it to learn too much (i.e. too many patterns). One solution could be to stop the training earlier. However, this could lead the model to not learn enough patterns from the training data, and possibly not even capture the dominant trend. This case is called underfitting.
+
+![](images/overfitting2.png)\
+Detecting whether the model suffers from either one is the sole responsibility of the model developer.
+
+![](images/Capture.jpg){width="1000" height="10"}
+
+## Test Train Split
+
+-   Should we use all the data for training a model?
+
+-   Data Scientists usually keep parts of the data for testing the model performance
+
+-   if we use all the data for training then we do not have any way of evaluating the model performance.
+
+\
+![](images/traintest.png)
+
+Can you think of the challenges here?
+
+## Cross Validation
+
+![](images/crossval1.png)\
+
+![](images/crossval2.png)
+
+![](images/Capture.jpg){width="1000" height="10"}
+
+# Step 4. Use Cases
+
+-   What are some of the use cases for AI/ML ?
+
+-   Nearly all occupations will be affected by automation
+
+-   But only about 5 percent of occupations could be fully automated by currently demonstrated technologies.
+
+-   Many more occupations have portions of their constituent activities that are automatable:
+
+    -   We find that about 30 percent of the activities in 60 percent of all occupations could be automated.
+
+![](images/applications.png)
+
+![](images/Capture.jpg){width="1000" height="10"}
+
+# Next Steps
+
+-   Make sure to install the latest version
+
+-   We will go over the R Programming language after break:
+
+\
+![](images/RStudio0.png)
+
+\
