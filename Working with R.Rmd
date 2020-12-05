@@ -1,7 +1,5 @@
 ---
 title: "Working with R"
-#output: html_notebook
-#runtime: shiny
 output: html_document
 ---
 
@@ -43,6 +41,22 @@ pre { /* Code block - determines code spacing between lines */
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+# **Learning Objectives**
+
+*In this lesson, we will go over the following:*
+
+-   Define different data types and data structures in R.
+
+-   Introduce dplyr and use it
+
+-   Data import and exports (csv, table, readxl)
+
+-   Working with data frames.
+
+-   Data manipulation
+
+-   Functions![](images/Capture.jpg){width="1000" height="10"}
+
 # Data Types
 
 ## Vectors
@@ -82,38 +96,44 @@ How to identify data type?
     class(x)
     mode(x)
 
+![](images/Capture.jpg){width="1000" height="10"}
+
 ## Factors
 
 -   Categorical data (nominal or ordinal) are most easily stored as a\
-    different class of data called factors
+    different class of data called *factors*
 
 -   Non-numerical vectors are recognized as factors
 
-        a <- c("female", "male", "female", "male")
-        a
+    ```{r}
+    a <- c("female", "male", "female", "male")
+    a
 
-        a <- factor(a)
-        a
+    a <- factor(a)
+    a
+    ```
 
-![](images/Capture.jpg)
+<!-- -->
 
 -   Type Conversion
 
-    -   Group of functions in R called coercion functions that just change objects from one type to another
+    -   Group of functions in R called *coercion* functions that just change objects from one type to another
 
-            x <- 1:10
-            x
+        ```{r}
+        x <- 1:10
+        x
 
-            x <- as.character(x)
-            x
+        x <- as.character(x)
+        x
+        ```
 
 All functions can be found
 
-    apropos("^as\\.")
+```{r}
+apropos("^as\\.")
+```
 
-------------------------------------------------------------------------
-
-------------------------------------------------------------------------
+![](images/Capture.jpg){width="1000" height="10"}
 
 # Data Structures
 
@@ -131,29 +151,29 @@ All functions can be found
 
     -   Lists
 
-        ------------------------------------------------------------------------
+![](images/Capture.jpg){width="1000" height="10"}
 
-        ## Data Structures Overview
+## Data Structures Overview
 
-        -   Matrices are similar to vectors, but have two dimensions
+-   **Matrices** are similar to vectors, but have two dimensions
 
-        <!-- -->
+    ```{r}
+    m <- matrix(1:30, nrow = 3)
+    m
+    ```
 
-            m <- matrix(1:30, nrow = 3)
-            m
+<!-- -->
 
-        ### 
+-   **Arrays** are similar to matrices, but can have more than two dimensions
 
-        -   Arrays are similar to matrices, but can have more than two dimensions
+    ```{r}
+    a <- array(1:27, dim = c(3, 3, 3))
+    a
+    ```
 
-        <!-- -->
+*\*\* vectors, matrices, and arrays is that they can only store one type of data at once*
 
-            a <- array(1:27, dim = c(3, 3, 3))
-            a
-
-        *\*\* vectors, matrices, and arrays is that they can only store one type of data at once*
-
-        ------------------------------------------------------------------------
+-   **Dataframes:**
 
     -   Data frames are two-dimensional objects similar to matrices
 
@@ -161,106 +181,133 @@ All functions can be found
 
     -   Data frames are similar to data sets used in other languages
 
-            dat <- read.csv("./data/marketing.csv")
+-   **Lists**
 
-        ------------------------------------------------------------------------
-
-        -   **Lists** are similar to vectors, in that they are an ordered collection of elements
+    -   They are similar to vectors, in that they are an ordered collection of elements
 
         -   With **lists**, the elements can be other data objects
 
-        <!-- -->
+    ```{r}
+    L <- list("This is the first element in our list", 1:10)
+    ```
 
-            L <- list("This is the first element in our list", 1:10, dat)
-
-        ------------------------------------------------------------------------
+![](images/Capture.jpg){width="1000" height="10"}
 
 ## Vectors
 
 Elements are spaced by exactly 1, just separate the values of the first and last elements with a colon
 
-    1:5
+```{r}
+1:5
 
-    seq(-10, 10, 2)
+seq(-10, 10, 2)
 
-    rep(4, 5)
+rep(4, 5)
+```
 
 more fun with rep:
 
-    x <- 1:3
-    rep(x, 4)
+```{r}
+x <- 1:3
+rep(x, 4)
 
-    rep(x, each = 4)
+rep(x, each = 4)
+```
 
 build a vector combining different elements
 
-    c(2, 1, 5, 100, 2)
+```{r}
+c(2, 1, 5, 100, 2)
+```
 
 You can also name them:
 
-    c(a = 2, b = 1, c = 5, d = 100, e = 2)
+```{r}
+c(a = 2, b = 1, c = 5, d = 100, e = 2)
+```
 
 a vector of a certain length
 
-    x <- numeric(50)
-    x
+```{r}
+x <- numeric(50)
+x
+```
 
 Logical vectors: very useful in R for indexing:
 
-    x <- 1:10
-    x>5
+```{r}
+x <- 1:10
+x>5
+```
 
-### Quiz:
+### Challenge:
 
-What is the proportion of values in x that were greater than 3
+What is the proportion of values in x that were greater than 3:
 
-    mean(x>3)
+```{r eval=FALSE, include=FALSE}
+mean(x>3)
+```
 
 ## Matrices, arrays, and lists
 
 To generate a matrix, the matrix function can be used
 
-    m <- matrix(1:15, nrow = 5)
-    m
+```{r}
+m <- matrix(1:15, nrow = 5)
+m
+```
 
 change the filling order, you can use the byrow argument
 
-    m <- matrix(1:15, nrow = 5, byrow = TRUE)
-    m
-
-------------------------------------------------------------------------
+```{r}
+m <- matrix(1:15, nrow = 5, byrow = TRUE)
+m
+```
 
 A similar function is available for higher-order arrays, called array
 
-    a <- array(1:30, dim = c(5, 3, 2))
-    a
+```{r}
+a <- array(1:30, dim = c(5, 3, 2))
+a
+```
 
 Lists are simple to create in R-just combine the individual elements with the list function
 
-    l <- list(x, name, m)
-    l
+```{r}
+l <- list(m,a)
+l
+```
 
-### Quiz
+### Challenge:
 
-Conver x to a list
+Create a vector, called x, as numbers between 10 to 20 . Convert x to a list called ll.
+
+```{r}
+x <- 10:20
+ll <- as.list(x)
+```
 
     as.list(x)
 
+![](images/Capture.jpg){width="1000" height="10"}
+
 # Data import, and data export
 
-## Working directory
+## What is the current working directory?
 
 Try reading in a data file with this command
 
-    pop <- read.csv("../data/us_pop.csv")
+    marketing <- read.csv("Intro-to-R/data/marketing.csv")
 
-*"\# cannot open file 'us_pop.csv': No such file or directory "*
+[cannot open file 'Intro-to-R/data/marketing.csv': No such file or directory]{.ul}
 
 the file is not in R's **working directory**
 
 We first need to find the current work directory:
 
-    getwd()
+```{r}
+getwd()
+```
 
 Let's brows the directory:
 
@@ -272,10 +319,10 @@ Let's brows the directory:
 Change the directory:
 
     setwd("C:/Users/Morteza/Documents/RStudio")
-    #C:/Users/Morteza/Documents/RStudio/Intro to R
+    #C:/Users/Morteza/Documents/RStudio/Intro-to-R
     #C:/Users/Morteza/Documents/RStudio
 
-## Reading text files
+## Data frames and reading text files
 
 -   A data frame is probably the most common data structure that you will use for storing what you might call data sets
 
@@ -283,25 +330,27 @@ Change the directory:
 
 -   Let's open the data in text editor first
 
-        pop <- read.csv("../data/us_pop.csv")
-        pop
+    ```{r}
+    marketing <- read.csv("./data/marketing.csv")
+    marketing
+    ```
 
 -   If you encounter files with a *semicolon separator* and a decimal comma, use the **read.csv2** or **read_csv2** function.
 
--   what if the separator is something else?
+-   What if the separator is something else?
 
-        flow <- read.table("../data/flow_2006_summary.txt", header = TRUE)
-        head(flow)
+    ```{r}
+    marketing_txt <- read.table("./data/marketing.txt", header = TRUE)
+    head(marketing_txt)
+    ```
+
+    ```{r}
+    tail(marketing_txt)
+    ```
 
     -   Read.csv uses another function called read.table. Take a look and discuss the differences.
 
--   The easiest approach to handling missing values
-
-        which(is.na(flow$discharge))
-
-<!-- -->
-
-    flow
+    ![](images/Capture.jpg){width="1000" height="10"}
 
 Ask a few things about any new file:
 
@@ -310,28 +359,21 @@ Ask a few things about any new file:
 3.  What symbol is used for decimals (dec argument)?\
 4.  What symbol is used for missing values (na.strings argument)?
 
-### Example 1
+### Example
 
--   Open Ni ec50s.txt and first answer the questions
+-   Open marketing_sep and first answer the questions
 
-        ni <- read.table("../data/Ni_ec50s.txt", header = TRUE)
-        ni
+-   You should specify a separator
 
--   you can speciafy a separator
+    ```{r}
+    marketing_sep <- read.table("./data/marketing_sep.txt", header = TRUE,sep="|")
+    head(marketing_sep)
+    ```
 
-        ni <- read.table("../data/Ni_ec50s.txt", header = TRUE, sep = "nt")
-        ni
+    ### Challenge: Read the titanic.txt file and show the imported data.
 
-    ### Excercise.
-
-    Read the us_pop.txt file and show the imported data.
-
-        pop <- read.table("../data/us_pop.txt", header = TRUE)
-        head(pop)
-
--   Note that we did not need to specify a separator, since one or more white space characters (spaces, in this case) are interpreted as a separator
-
--   How about other file types? spreed sheet?
+        titanic <- read.table("./data/titanic.txt", header = TRUE,sep="|")
+        head(titanic)
 
 ## Reading spreadsheet files
 
@@ -350,66 +392,111 @@ Ask a few things about any new file:
 
     -   readxl is the easiest one
 
-            library(readxl)
-            h1 <- read_excel("../data/biohydrogen.xlsx", sheet = 2)
-            head(h1)
+        ```{r}
+        library(readxl)
+        drinks <- read_excel("./data/drinks.xlsx",sheet=2)
+        head(drinks)
+        ```
+
+**Optional: excel_sheets function**
+
+Read all worksheets in an excel file:
+
+```{r}
+path <- "./data/drinks.xlsx"
+sheets <- excel_sheets(path)
+for (sh in sheets){
+  print(head(read_excel(path, sheet = sh)))
+}
+```
 
 ## Create data frames manually
 
-So far, we created a data frame by importing data from a file.
+-   So far, we created a data frame by importing data from a file.
 
-Some times, we need to create a dataframe in our codes based on variables.
+-   Some times, we need to create a dataframe in our codes based on variables.
 
 First, we create two columns: Group and Mass:
 
-    group <- c("A", "B", "C", "D")
-    mass <- rnorm(4, mean = 50)
+```{r}
+group <- c("A", "B", "C", "D")
+mass <- rnorm(4, mean = 50)
+```
 
 Then, we use data.frame to define the dataframe:
 
-    dat <- data.frame(id = group, mean = mass)
-    dat
+```{r}
+df <- data.frame(id = group, mean = mass)
+df
+```
 
-Let's play with the data frame:
+-   Name of the columns:
 
--   Find the columns name
-
-<!-- -->
-
-    names(dat)
-
--   assign new names to the columns
+    ```{r}
+    names(df)
+    ```
 
 <!-- -->
 
-    names(dat) <- c("date", "mass")
-    dat
+-   Assign new names to the columns
 
--   you can also give names to rows (useful for indexing data )
+    ```{r}
+    names(df) <- c("date", "mass")
+    df
+    ```
 
-<!-- -->
+![](images/Capture.jpg){width="1000" height="10"}
 
-    dat <- data.frame(id = group, mean = mass, row.names = c("a", "b", "c", "d"))
-    dat
+# Working with data frames
 
-### Working with data frames
+## dplyr package
+
+-   the most popular package in R for data manipulation
+
+![](images/logo.png){width="154"}
+
+### **Installation**
+
+```{r}
+# The easiest way to get dplyr is to install the whole tidyverse:
+#install.packages("tidyverse")
+# Alternatively, install just dplyr:
+#install.packages("dplyr")
+```
+
+### **Usage:**
+
+```{r}
+library(dplyr)
+```
 
 The data in a data frame will be used in some type of analysis or plotting procedure
 
 First you need to do some form of data checking
 
-    h2 <- read.csv("../data/biohydrogen.csv")
+```{r}
+drinks <- read.csv("./data/drinks.csv")
+head(drinks)
+```
 
 One option is to use summary:
 
-    summary(h2)
+```{r}
+summary(drinks)
+```
 
-The functions unique(), sort(), and range() can also be useful for checking data
+```{r}
+names(drinks)
+```
 
-    unique(h2$reactor)
-    unique(h2$date)
+The functions unique() can also be useful for checking data
 
-Common problems in data:
+```{r}
+#finding the unique recprds
+unique(drinks)
+```
+
+**Common problems in data:**
 
 -   Numeric columns stored as character data
 
@@ -427,62 +514,87 @@ Common problems in data:
 
 In order to use data frame data for a plot or analysis, you should be able to select and identify specific columns within data frames:
 
-    h2 <- read.csv("../data/biohydrogen.csv")
-    names(h2)
+### **Access to a column**
 
 The \$ notation just uses a \$ between the data frame name and column name to specify a particular column
 
-    h2$vol
+```{r}
+drinks$continent
+```
 
 then you can use it as a vector:
 
-    mean(h2$vol)
+```{r}
+unique(drinks$continent)
+```
 
-remove the NA values:
+Access to multiple columns:
 
-    mean(na.omit(h2$vol))
+```{r}
+df <- select(drinks, country, continent)
+```
 
-Create a new column:
+```{r}
+head(df)
+```
 
-    h2$vol.L <- h2$vol/1000
-    head(h2)
+### **Rename a column (rename function):**
 
-### Exercise
+```{r}
+drinks <- rename(drinks, litres=total_litres_of_pure_alcohol, beer=beer_servings, win=wine_servings,spirit=spirit_servings )
+head(drinks)
+```
 
-Let's read conc.h2 column and remove the NA values.
+### Add a new column:
 
-    h2$conc.h2
-    na.omit(h2$conc.h2)
+```{r}
+drinks$litersML <- drinks$litres*100
+head(drinks)
+```
 
-**Question:** How can we remove all the NA from a dataframe?
+### **Remove a column:**
 
-Work with a smaller subset of a dataframe:
+```{r}
+#we use select function with -at the beginning of columns
+drinks <- select(drinks,-country)
+```
 
-    pres <- read.csv("../data/presidents.csv")
-    pres19 <- pres[pres$first > 1899, ]
-    p <- pres19
-    head(p)
-    names(p)[3:4] <- c("dob", "dod")
+### Work with a smaller subset of a dataframe:
 
-you can also rename a column using dplyr library:
+```{r}
+ufo <- read.csv("./data/ufo.csv")
+names(ufo)
+```
 
-    library(dplyr)
-    p <- rename(p, dob = birth, dod = death)
-    head(p)
+```{r}
+unique(ufo$State)
+```
+
+```{r}
+ufo_NY <- ufo[ufo$State == "NY", ]
+head(ufo_NY)
+```
+
+```{r}
+names(ufo_NY)[1:2] <- c("CTY", "CLRS")
+```
 
 ## Writing data to files
 
-The function **write.table** (or the related function **write.csv**) is the best function for writing out data frames.
+The function **write.csv** is the best function for writing out data frames.
 
-    args(write.table)
+```{r}
+write.csv(ufo_NY, "./output/ufo_NY.csv", row.names = FALSE)
+```
 
-    write.table(h2, "../output/h2.txt")
+**Bonus (write.table):**
 
-Or
+```{r}
+args(write.table)
+write.table(ufo_NY, "./output/ufo_NY.txt")
+```
 
-    write.csv(h2, "../output/h2.csv", row.names = FALSE)
-
-write.csv is recommended :)
+![](images/Capture.jpg){width="1000" height="10"}
 
 # Data manipulation
 
@@ -495,149 +607,172 @@ write.csv is recommended :)
 
 -   Indexing is generally done using square brackets
 
-        x <- c(5, 1, 12, 8)
-        x[3]
+    ```{r}
+    x <- c(5, 1, 12, 8)
+    x[3]
+    ```
 
-    For the 1st through 3rd observation:
+-   For the 1st through 3rd observation:
 
-        x[1:3]
+    ```{r}
+    x[1:3]
+    ```
 
-    While this returns all but the 4th observation:\
+-   While this returns all but the 4th observation:
 
-        x[-4]
+    ```{r}
+    x[-4]
+    ```
 
-    let's play with it:
+-   let's play with it:
 
-        x[x<5]
-        x<5
+    ```{r}
+    x[x<5]
+    x<5
+    ```
 
-    Indexing can also be used to change the value of elements
+-   Indexing can also be used to change the value of elements
 
-        x[2] <- 100
-        x
+    ```{r}
+    x[2] <- 100
+    x
+    ```
 
-    And you can change its size by assinging a value to a non-existing index:
+    ## **Practice:**
 
-        x <- c(5, 1, 3, 8)
-        x[8] <- 10
+    ```{r}
+    titanic <- read.csv("./data/titanic.csv")
+    dim(titanic)
 
-    Practice:
-
-        flow <- read.csv("../data/flow_2006_summary.csv")
-        dim(flow)
-
-        head(flow)
+    head(titanic)
+    ```
 
     We want only the first five rows and first two columns
 
-        flow[1:5, 1:2]
+    ```{r}
+    titanic[1:5, 1:2]
 
-        flow[1:5, c("month", "discharge")]
+    titanic[1:5, c("Name", "Sex")]
+    ```
 
 How about five rows:
 
-    flow[1:5, ]
+```{r}
+titanic[1:5, ]
+```
 
-Or only one column:
+-   We can apply relational expressions using indexing:
 
-    flow[1:5, "site.id"]
+Let's pull out only those rows with age below, say, 30:
 
-We can apply relational expressions using indexing:
+```{r}
+titanic[titanic$Age<30, ]
+```
 
-Let's pull out only those rows with discharge below, say, the 25th percentile
-
-    flow[flow$discharge<13105.9, ]
-
-### Subsetting
+## Subsetting
 
 Subsetting is used to select a subset of a vector:
 
-    subset(flow, discharge<13105.9)
+```{r}
+subset(titanic, Age<30)
+```
 
 'and' expression:
 
-    subset(flow, discharge>13105.9 & site.id == 4232730)
+```{r}
+subset(titanic, Age<30 & Sex == "female")
+```
 
 'or' expression:
 
-    subset(flow, month == "May" | month == "Jun" | month == "Jul")
-
-    subset(flow, month %in% c("May", "Jun", "Jul"))
+```{r}
+subset(titanic, Age<30 | Age > 60)
+```
 
 **Extra tips:** There are two functions in the dplyr package that can replace most or all of the extracting that you might otherwise do with indexing and the subset function.
 
     library(tidyverse)
-    filter(flow, discharge < 13105.9)
-    filter(flow, discharge>13105.9, site.id == 4232730)
-    filter(flow, discharge>13105.9 & site.id == 4232730)
-    filter(flow, month %in% c("May", "Jun", "Jul"))
+    filter(titanic, Age < 30)
+    filter(titanic, Age < 30, Sex == "female")
+    filter(titanic,Age < 30 & Sex == "female")
+    filter(titanic, Embarked %in% c("C", "S"))
 
 \*\* The slice and filter functions differ from indexing the [ ] in an important way: they only work on rows.
 
-To select columns, you need to use the select function:
-
-    wind <- read.csv("../data/ave_wind_us.csv")
-    head(wind)
-    dplyr::select(wind, jan)
-
-Indexing of matrices and arrays is similar to vectors and data frames
-
-    m <- matrix(rnorm(25), nrow = 5)
-    m
-
-    m[3, 2]
-
-    m[m<10] <- NA
-
-### Sorting data and locating observations
+## Sorting data and locating observations
 
 For a single vector, this is done with the function sort
 
-    x <- rnorm(5)
-    x
+```{r}
+x <- rnorm(5)
+x
 
-    sort(x)
+sort(x)
+```
 
 we use 'order' function to sort the entire data frame by one column?
 
-    pres19[order(pres19$birth, pres19$name, decreasing = TRUE), ]
+```{r}
+titanic[order(titanic$Age, titanic$Sex, decreasing = TRUE), ]
+```
 
-what does this do?
+**Challenge: what does this do?**
 
-    pres19[order(-pres19$birth, pres19$name), ]
+    titanic[order(-titanic$Age, titanic$Sex), ]
+
+### **Locating**
 
 Sometimes it is important to know where data reside in the original data\
 structure
 
-    match(7917.205, flow$discharge)
+```{r}
+match("56", titanic$Age)
+```
 
-I might use match to find the location of the element with the maximum value:
+The *which function*, on the other hand, will return all locations that meet the criterion or criteria
 
-    match(max(flow$discharge), flow$discharge)
+```{r}
+which(titanic$Age == 56 )
+```
 
-The which function, on the other hand, will return all locations that meet the criterion or criteria
-
-    which(flow$discharge<20000 & flow$discharge>10000)
-
-### Combining data frames and matrices
+### Combining data frames (rbind(), merge())
 
 Data frames (or vectors or matrices) often need to be combined for analysis or plotting\
-rbind() (row bind), and merge() are the popular function for cimbining dataframes.\
 
-    m <- matrix(1:12, nrow = 3)
-    m
+```{r}
+m1 <- matrix(1:12, nrow = 3)
+m1
 
-    mm <- rbind(m, 1:4)
-    mm
+m2 <- 1:4
+m2
+
+```
+
+```{r}
+#combine them
+mm <- rbind(m1,m2)
+mm
+```
 
 The rbind() function can be used in the same way for data frames
 
-    pop <- read.csv("../data/us_pop.csv")
-    gdp <- read.csv("../data/us_gdp.csv")
+```{r}
+beer <- read.csv("./data/beer.csv")
+head(beer)
+```
 
-    us <- merge(pop, gdp, by = "year")
+```{r}
+wine <- read.csv("./data/wine.csv")
+head(wine)
+```
 
-Notice that us does not have rows for all the years that are present in the gdp data frame, because most of them didn't have a matching year in pop\
+We want to merge them based on the country:
+
+```{r}
+beer_wine <- merge(beer, wine, by = "country")
+```
+
+If beer does not have rows for all the country that are present in the wine data frame, then most of them didn't have a matching country in pop\
 If you want to keep all rows regardless, use all = TRUE.
 
     us <- merge(pop, gdp, by = "year", all = TRUE)
@@ -681,7 +816,6 @@ print_square <- function(a) {
     new.function(6)
 
 \
-
 **apply()** is primarily used to avoid explicit uses of loop constructs. It is the most basic of all collections can be used over a matrice.
 
 This function takes 3 arguments:\
@@ -701,17 +835,21 @@ This function takes 3 arguments:\
 
 **Example**
 
-    m1 <- matrix(C<-(1:10),nrow=5, ncol=6)
-    m1
+```{r}
+m1 <- matrix(C<-(1:10),nrow=5, ncol=6)
+m1
 
-    a_m1 <- apply(m1, 2, sum)
-    a_m1
+a_m1 <- apply(m1, 2, sum)
+a_m1
+```
 
 **lapply():** is useful for performing operations on list objects and returns a list object of same length of original set
 
-    movies <- c("SPYDERMAN","BATMAN","VERTIGO","CHINATOWN")
-    movies_lower <-lapply(movies, tolower)
-    str(movies_lower)
+```{r}
+movies <- c("SPYDERMAN","BATMAN","VERTIGO","CHINATOWN")
+movies_lower <-lapply(movies, tolower)
+str(movies_lower)
+```
 
 **sapply() function:** sapply() function does the same job as lapply() function but returns a vector.
 
