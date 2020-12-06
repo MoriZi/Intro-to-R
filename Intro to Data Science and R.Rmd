@@ -30,18 +30,24 @@ h3 { /* Header 3 */
   color: DarkBlue;
 }
 code.r{ /* Code block */
-    font-size: 24px;
+    font-size: 20px;
 }
 pre { /* Code block - determines code spacing between lines */
-    font-size: 24px;
+    font-size: 20px;
+    overflow-x: auto;
+}
+pre code {
+  word-wrap: normal;
+  white-space: pre;
 }
 </style>
 ```
 
 ------------------------------------------------------------------------
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r global_options, echo = FALSE, include = FALSE}
+options(width = 999)
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, cache = FALSE, tidy = FALSE, size = "small")
 ```
 
 # Learning Objectives
@@ -97,6 +103,8 @@ Data Science can help us with use cases such as:
 
 # Artificial Intelligence vs. Machine Learning vs. Deep Learning
 
+![](images/AIImag.png)
+
 -   Artificial intelligence is an umbrella term that covers machine learning and deep learning
 
 -   Deep learning and neural networks are also types of machine learning algorithms
@@ -129,7 +137,7 @@ Read more here: <https://www.mckinsey.com/business-functions/mckinsey-analytics/
 
 ![](images/Capture.jpg){width="1000" height="10"}
 
-# Why is AI powerful?
+# Machine Learning Example
 
 ## ![](images/housing.png)
 
@@ -217,11 +225,11 @@ Ultimately, the customer wants us to:
 
     -   We have to decide if these limitations will inhibit our ability to answer our question of interest or if we can work with what we have to find a reasonable and reliable answer.
 
-## Example We provide a set of housing data for Ames, Iowa, which includes:
+## Example
+
+We provide a set of housing data for Ames, Iowa, which includes:
 
 -   20 continuous variables indicating square footage.
-
-<!-- -->
 
 -   14 discrete variables indicating number of each room type.
 
@@ -231,9 +239,20 @@ Ultimately, the customer wants us to:
 
     ![](images/housing2.png)
 
--   **This is possibly the hardest step in the data science workflow**. At this stage, it's common to realize that the problem you're trying to solve may not be solvable with the information available.
+-   **This is possibly the hardest step in the data science workflow**.
+
+-   At this stage, it's common to realize that the problem you're trying to solve may not be solvable with the information available.
 
 -   The data could be incomplete, non-existant, or unable to meet the criteria necessary to answer your question.
+
+-   Example of Ames housing
+
+    ```{r echo=FALSE}
+    df <- read.csv("./data/AmesHousing.csv")
+    new_DF <- df[rowSums(is.na(df)) > 0,]
+    head(new_DF,n=15)
+
+    ```
 
     ![](images/Capture.jpg){width="1000" height="10"}
 
@@ -288,9 +307,9 @@ Data scientists use one of these available algorithms and tune it for their use 
 Given you an idea what you'll learn in this course:
 
 ```{r}
-real_state <- read.csv("data/Real estate.csv")
-formula = Y.house.price.of.unit.area~ X2.house.age
-lm_1 <- lm(formula,data=real_state)
+ames <- read.csv("data/AmesHousing.csv")
+formula = SalePrice~ Street
+lm_1 <- lm(formula,data=ames)
 summary(lm_1)
 ```
 
@@ -409,7 +428,9 @@ Detecting whether the model suffers from either one is the sole responsibility o
 
 Can you think of the challenges here?
 
-## Cross Validation
+![](images/Capture.jpg){width="1000" height="10"}
+
+## Extra: Cross Validation
 
 ![](images/crossval1.png)\
 
@@ -578,7 +599,7 @@ Two ways to set it:
 
     ```{r}
     getwd() #tells you the current directory
-    setwd('C:/Users/Morteza/Documents/RStudio/Intro to R - Day 1')#set the current directory
+    #setwd('C:/Users/Morteza/Documents/RStudio/Intro to R - Day 1')#set the current directory
     ```
 
     ## Run a script in RStudio
