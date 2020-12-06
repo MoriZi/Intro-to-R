@@ -30,15 +30,21 @@ h3 { /* Header 3 */
   color: DarkBlue;
 }
 code.r{ /* Code block */
-    font-size: 24px;
+    font-size: 20px;
 }
 pre { /* Code block - determines code spacing between lines */
-    font-size: 24px;
+    font-size: 20px;
+    overflow-x: auto;
+}
+pre code {
+  word-wrap: normal;
+  white-space: pre;
 }
 </style>
 ```
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r global_options, echo = FALSE, include = FALSE}
+options(width = 999)
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, cache = FALSE, tidy = FALSE, size = "small")
 ```
 
 # **Learning Objectives**
@@ -560,7 +566,7 @@ drinks <- rename(drinks, litres=total_litres_of_pure_alcohol, beer=beer_servings
 head(drinks)
 ```
 
-### Add a new column:
+### **Add a new column:**
 
 ```{r}
 drinks$litersML <- drinks$litres*100
@@ -654,6 +660,8 @@ write.table(ufo_NY, "./output/ufo_NY.txt")
     ```
 
     ## **Practice:**
+
+    Read titanic dataset and do the following operations:
 
     ```{r}
     titanic <- read.csv("./data/titanic.csv")
@@ -795,9 +803,74 @@ If you want to keep all rows regardless, use all = TRUE.
 
 **Bonus:** what if the variables you would like to merge by don't have the same name in both data frames?
 
-## **Functions**
+## **Handling Missing Values**
 
-**When would you want to call the same code over and over again? What benefit does that have in programming?**
+-   **Objective:** Know how to handle null and missing values.\
+
+-   Sometimes, values will be missing from the source data or as a byproduct of manipulations. It is very important to detect missing data. Missing data can:
+
+    -   Make the entire row ineligible to be training data for a model.
+
+    -   Hint at data-collection errors.
+
+    -   Indicate improper conversion or manipulation.
+
+    -   Actually not be missing --- it sometimes means "zero," "false," "not applicable," or "entered an empty string."
+
+-   For example,
+
+```{r}
+# vector with missing data
+x <- c(1:4, NA, 6:7, NA)
+x
+```
+
+```{r}
+#find out if a vector has missing values
+is.na(x)
+
+```
+
+```{r}
+#identify the location
+which(is.na(x))
+
+```
+
+Exclude missing values
+
+```{r}
+mean(x)
+# excluding NA values will calculate the mathematical operation for all non-missing values
+mean(x, na.rm = TRUE)
+```
+
+Find complete cases in a dataframe:
+
+```{r}
+# subset with complete.cases to get complete cases
+ufo <- read.csv("./data/ufo.csv")
+complete.cases(ufo)
+ames[complete.cases(ufo), ]
+```
+
+or we can remove them:
+
+```{r}
+na.omit(ufo)
+```
+
+**Exercises:**
+
+-   How many missing values are in the titanic?
+
+-   Calculate mean value for Age
+
+-   Omit all rows containing missing values?
+
+# **Functions**
+
+When would you want to call the same code over and over again? What benefit does that have in programming?
 
 Similar to the way we can use `for` loops as a means of performing repetitive tasks on a series of objects, we can also create functions to perform repetitive tasks. Within a function, we can write a large block of action and then call the function whenever we want to use it.
 
