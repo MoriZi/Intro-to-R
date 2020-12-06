@@ -247,24 +247,30 @@ pre { /* Code block - determines code spacing between lines */
 <li><p>Four common types of vectors:</p>
 <ul>
 <li><p>Numeric:</p>
-<pre><code>x &lt;- 10.2
-x</code></pre></li>
+<pre class="r"><code>x &lt;- 10.2
+x</code></pre>
+<pre><code>## [1] 10.2</code></pre></li>
 <li><p>Integer:</p>
-<pre><code>y &lt;- 1:5
-y</code></pre></li>
+<pre class="r"><code>y &lt;- 1:5
+y</code></pre>
+<pre><code>## [1] 1 2 3 4 5</code></pre></li>
 <li><p>Character</p>
-<pre><code>name &lt;- &quot;Johnny Appleseed&quot;
-name</code></pre></li>
+<pre class="r"><code>name &lt;- &quot;Johnny Appleseed&quot;
+name</code></pre>
+<pre><code>## [1] &quot;Johnny Appleseed&quot;</code></pre></li>
 <li><p>Logical.</p>
-<pre><code>a &lt;- TRUE
-a</code></pre></li>
+<pre class="r"><code>a &lt;- TRUE
+a</code></pre>
+<pre><code>## [1] TRUE</code></pre></li>
 <li><p>How about ?</p>
-<pre><code>name &lt;- Johnny</code></pre></li>
+<pre class="r"><code>#name &lt;- Johnny</code></pre></li>
 </ul></li>
 </ul>
 <p>How to identify data type?</p>
-<pre><code>class(x)
-mode(x)</code></pre>
+<pre class="r"><code>class(x)</code></pre>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<pre class="r"><code>mode(x)</code></pre>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
 <p><img src="data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAABNUAAAArCAYAAABfAb5oAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGYSURBVHhe7dw9TgJRGIZR1iIkFmyRsXNPbmN2wJ+aWFgYAyRk5pJc6Pne/hRnE0/xLMZxbNM8AQAAAABFPapd5wYAAAAAFPWoNs8TAAAAAFB0j2rTBQAAAAAouj/V2h8AAAAAUNSj2u/HOwAAAABQ1KPaz9saAAAAACjqUe1/eAUAAAAAinpUO29WAAAAAEBRj2qn4QUAAAAAKHpEtSUAAAAAUPSIaisAAAAAoEhUAwAAAICQqAYAAAAAIVENAAAAAEKiGgAAAACERDUAAAAACIlqAAAAABAS1QAAAAAgJKoBAAAAQEhUAwAAAICQqAYAAAAAIVENAAAAAEKiGgAAAACERDUAAAAACIlqAAAAABAS1QAAAAAgJKoBAAAAQEhUAwAAAICQqAYAAAAAIVENAAAAAEKiGgAAAACERDUAAAAACIlqAAAAABAS1QAAAAAgJKoBAAAAQEhUAwAAAICQqAYAAAAAIVENAAAAAEKiGgAAAACERDUAAAAACPWoBgAAAADULY5f321//Gzb/aHtAAAAAIAnDu0G1GSKK/kYKDUAAAAASUVORK5CYII=" width="1000" height="10" /></p>
 </div>
 <div id="factors" class="section level2">
@@ -847,10 +853,10 @@ mass &lt;- rnorm(4, mean = 50)</code></pre>
 <pre class="r"><code>df &lt;- data.frame(id = group, mean = mass)
 df</code></pre>
 <pre><code>##   id     mean
-## 1  A 47.63730
-## 2  B 50.57163
-## 3  C 50.41832
-## 4  D 50.31445</code></pre>
+## 1  A 52.71770
+## 2  B 48.19098
+## 3  C 50.32218
+## 4  D 47.39272</code></pre>
 <ul>
 <li><p>Name of the columns:</p>
 <pre class="r"><code>names(df)</code></pre>
@@ -862,10 +868,10 @@ df</code></pre>
 <pre class="r"><code>names(df) &lt;- c(&quot;date&quot;, &quot;mass&quot;)
 df</code></pre>
 <pre><code>##   date     mass
-## 1    A 47.63730
-## 2    B 50.57163
-## 3    C 50.41832
-## 4    D 50.31445</code></pre></li>
+## 1    A 52.71770
+## 2    B 48.19098
+## 3    C 50.32218
+## 4    D 47.39272</code></pre></li>
 </ul>
 <p><img src="data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAABNUAAAArCAYAAABfAb5oAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGYSURBVHhe7dw9TgJRGIZR1iIkFmyRsXNPbmN2wJ+aWFgYAyRk5pJc6Pne/hRnE0/xLMZxbNM8AQAAAABFPapd5wYAAAAAFPWoNs8TAAAAAFB0j2rTBQAAAAAouj/V2h8AAAAAUNSj2u/HOwAAAABQ1KPaz9saAAAAACjqUe1/eAUAAAAAinpUO29WAAAAAEBRj2qn4QUAAAAAKHpEtSUAAAAAUPSIaisAAAAAoEhUAwAAAICQqAYAAAAAIVENAAAAAEKiGgAAAACERDUAAAAACIlqAAAAABAS1QAAAAAgJKoBAAAAQEhUAwAAAICQqAYAAAAAIVENAAAAAEKiGgAAAACERDUAAAAACIlqAAAAABAS1QAAAAAgJKoBAAAAQEhUAwAAAICQqAYAAAAAIVENAAAAAEKiGgAAAACERDUAAAAACIlqAAAAABAS1QAAAAAgJKoBAAAAQEhUAwAAAICQqAYAAAAAIVENAAAAAEKiGgAAAACERDUAAAAACPWoBgAAAADULY5f321//Gzb/aHtAAAAAIAnDu0G1GSKK/kYKDUAAAAASUVORK5CYII=" width="1000" height="10" /></p>
 </div>
@@ -7410,9 +7416,9 @@ filter(titanic, Embarked %in% c(&quot;C&quot;, &quot;S&quot;))</code></pre>
 <p>For a single vector, this is done with the function sort</p>
 <pre class="r"><code>x &lt;- rnorm(5)
 x</code></pre>
-<pre><code>## [1]  0.16820660 -2.29677900  0.31929154 -0.07912457 -0.39825304</code></pre>
+<pre><code>## [1]  0.45371852  0.47553174 -1.04554808  0.04769871  0.19726604</code></pre>
 <pre class="r"><code>sort(x)</code></pre>
-<pre><code>## [1] -2.29677900 -0.39825304 -0.07912457  0.16820660  0.31929154</code></pre>
+<pre><code>## [1] -1.04554808  0.04769871  0.19726604  0.45371852  0.47553174</code></pre>
 <p>we use ‘order’ function to sort the entire data frame by one column?</p>
 <pre class="r"><code>titanic[order(titanic$Age, titanic$Sex, decreasing = TRUE), ]</code></pre>
 <pre><code>##     PassengerId Survived Pclass

@@ -1,7 +1,5 @@
 ---
-# To run the file in R, press ctrl+shift+k or "knit" icon
----
-title: "Intro to Data Science"
+title: "Intro to Data Science" 
 output: html_document
 ---
 
