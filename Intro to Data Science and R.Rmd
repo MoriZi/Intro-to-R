@@ -463,8 +463,7 @@ Can you think of the challenges here?
 \
 ![](images/RStudio0.png)
 
-\
-\# Learning Objectives
+#  Learning Objectives
 
 \
 In this lesson, we will go over the followings:
