@@ -851,7 +851,7 @@ Find complete cases in a dataframe:
 # subset with complete.cases to get complete cases
 ufo <- read.csv("./data/ufo.csv")
 complete.cases(ufo)
-ames[complete.cases(ufo), ]
+ufo[complete.cases(ufo), ]
 ```
 
 or we can remove them:

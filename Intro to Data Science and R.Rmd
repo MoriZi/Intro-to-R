@@ -79,6 +79,8 @@ In this lesson, we will go over the following:
 
 -   Is one of our observations **"weird"**?
 
+    -   <https://www.northwesternmutual.com/anti-fraud-efforts/>
+
 ![](images/Capture.jpg){width="1000" height="10"}
 
 # From a business perspective
@@ -97,7 +99,11 @@ Data Science can help us with use cases such as:
 
 -   What *groups of products* are customers purchasing together?
 
--   Can we automate this simple yes/no decision?\
+    -   Example?!
+
+-   Can we automate this simple yes/no decision?
+
+    -   Credit card applications
 
 ![](images/Capture.jpg){width="1000" height="10"}
 
@@ -138,6 +144,8 @@ Read more here: <https://www.mckinsey.com/business-functions/mckinsey-analytics/
 ![](images/Capture.jpg){width="1000" height="10"}
 
 # Machine Learning Example
+
+Given different features of a house (age, price, \#rooms), is the house located in SF or NY?
 
 ## ![](images/housing.png)
 
@@ -345,7 +353,7 @@ Clustering and dimensionality reduction
 
 ![](images/supervised.png)
 
--   Oftentimes, we may combine both types of machine learning in a project to reduce the cost of data collection by learning a better representation. This is referred to as **transfer learning**.
+-   Oftentimes, we may combine both types of machine learning in a project to reduce the cost of data collection by learning a better representation.
 
 -   Unsupervised learning tends to present more difficult problems because its goals are amorphous. Supervised learning has goals that are almost too clear and can lead people into the trap of optimizing metrics without considering business value.
 
@@ -463,7 +471,7 @@ Can you think of the challenges here?
 \
 ![](images/RStudio0.png)
 
-#  Learning Objectives
+# Learning Objectives
 
 \
 In this lesson, we will go over the followings:
