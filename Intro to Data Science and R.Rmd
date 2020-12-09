@@ -714,10 +714,17 @@ if (50 < 30){
 }else{
     print("50 >= 30.")
     print("The else code block was run instead of the first block.")
-}
+} 
 
 print('---')
 print('These two lines are not indented, so they are always run next.')
+```
+
+```{r}
+# create two random variables
+#if the first one is bigger, add 10 to the variable 
+#print it is bigger with 10 extra point
+#else print the second one is bigger
 ```
 
 ## **`for` Loops**
@@ -734,8 +741,14 @@ Let's say we wanted to print each of the names in the list, as well as "is Aweso
 names <- c('Rebecca Bunch', 'Paula Proctor', 'Heather Davis')
 
 for (val in names) {
-  print(val)  
+  cat(val,"is Awesome \n")  
 }
+
+#write down a loop that takes a list and multiply each element by
+#10 and print its square root.
+
+#if the sqrt of the val is more than 8, print "this is exciting"
+#if not, print "too low to be true"
 ```
 
 ![](images/Capture.jpg){width="1000" height="10"}
@@ -750,8 +763,7 @@ for (val in names) {
 
 load a package
 
-```{r}
-library("dplyr")
+``` {.{.{.{library(\\\\\\\"dplyr\\\\\\\")}}}}
 ```
 
 ## The tidyverse packages
@@ -777,8 +789,7 @@ library("dplyr")
 
         install.packages("tidyverse")
 
-    ```{r}
-    library(tidyverse)
+    ``` {.{.{.{library(tidyverse)}}}}
     ```
 
     ![](images/Capture.jpg){width="1000" height="10"}

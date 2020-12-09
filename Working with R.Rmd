@@ -134,8 +134,6 @@ mode(x)
     a
     ```
 
-<!-- -->
-
 -   Type Conversion
 
     -   Group of functions in R called *coercion* functions that just change objects from one type to another
@@ -162,15 +160,15 @@ apropos("^as\\.")
 
 -   Most common data structures:
 
-    -   Vectors
+    -   **Vectors**
 
-    -   Matrices
+    -   **Matrices**
 
-    -   Arrays
+    -   **Arrays**
 
-    -   Data Frames
+    -   **Data Frames**
 
-    -   Lists
+    -   **Lists**
 
 ![](images/Capture.jpg){width="1000" height="10"}
 
@@ -183,8 +181,6 @@ apropos("^as\\.")
     m
     ```
 
-<!-- -->
-
 -   **Arrays** are similar to matrices, but can have more than two dimensions
 
     ```{r}
@@ -193,14 +189,6 @@ apropos("^as\\.")
     ```
 
 *\*\* vectors, matrices, and arrays is that they can only store one type of data at once*
-
--   **Dataframes:**
-
-    -   Data frames are two-dimensional objects similar to matrices
-
-    -   A data frame can contain columns
-
-    -   Data frames are similar to data sets used in other languages
 
 -   **Lists**
 
@@ -265,8 +253,10 @@ x>5
 
 What is the proportion of values in x that were greater than 3:
 
+Find the percentage of values in x that were greater than 3.
+
 ```{r eval=FALSE, include=FALSE}
-mean(x>3)
+#write down your code here
 ```
 
 ## Matrices, arrays, and lists
@@ -304,11 +294,8 @@ l
 Create a vector, called x, as numbers between 10 to 20 . Convert x to a list called ll.
 
 ```{r}
-x <- 10:20
-ll <- as.list(x)
+#write down your code here
 ```
-
-    as.list(x)
 
 ![](images/Capture.jpg){width="1000" height="10"}
 
@@ -334,7 +321,7 @@ Let's brows the directory:
 
     list.files()
     or 
-    list.files('../data')
+    list.files('./data')
 
 \*The ".." in a file path means "**go up one level**".\
 Change the directory:
@@ -393,8 +380,9 @@ Ask a few things about any new file:
 
     ### Challenge: Read the titanic.txt file and show the imported data.
 
-        titanic <- read.table("./data/titanic.txt", header = TRUE,sep="|")
-        head(titanic)
+    ```{r}
+    #Write down your code here.
+    ```
 
 ## Reading spreadsheet files
 
@@ -457,8 +445,6 @@ df
     names(df)
     ```
 
-<!-- -->
-
 -   Assign new names to the columns
 
     ```{r}
@@ -485,10 +471,10 @@ df
 #install.packages("dplyr")
 ```
 
-### **Usage:**
+### **Usage:** 
 
 ```{r}
-library(dplyr)
+library(tidyverse)
 ```
 
 The data in a data frame will be used in some type of analysis or plotting procedure
@@ -504,6 +490,7 @@ One option is to use summary:
 
 ```{r}
 summary(drinks)
+#glimpse
 ```
 
 ```{r}
@@ -579,6 +566,16 @@ head(drinks)
 #we use select function with -at the beginning of columns
 drinks <- select(drinks,-country)
 ```
+
+**Practice:** Let's do the following steps on ames housing dataset:
+
+-   Import it a datadrame called "ames_df"
+
+-   Rename MS Zoning column to "Zoning"
+
+-   Create a column that shows Lot Area divided by Lot Frontage and call it "proportion"
+
+-   Remove Utilities column.
 
 ### Work with a smaller subset of a dataframe:
 
@@ -663,6 +660,10 @@ write.table(ufo_NY, "./output/ufo_NY.txt")
 
     Read titanic dataset and do the following operations:
 
+-   We want only the first five rows and first two columns
+
+-   How about five rows
+
     ```{r}
     titanic <- read.csv("./data/titanic.csv")
     dim(titanic)
@@ -670,15 +671,11 @@ write.table(ufo_NY, "./output/ufo_NY.txt")
     head(titanic)
     ```
 
-    We want only the first five rows and first two columns
-
     ```{r}
     titanic[1:5, 1:2]
 
     titanic[1:5, c("Name", "Sex")]
     ```
-
-How about five rows:
 
 ```{r}
 titanic[1:5, ]
