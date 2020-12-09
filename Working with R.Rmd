@@ -181,6 +181,10 @@ apropos("^as\\.")
     m
     ```
 
+Practice: 
+- create a matrix with 25 elements and 5 rows. 
+- create a matrix with 26 elements and 5 rows.
+
 -   **Arrays** are similar to matrices, but can have more than two dimensions
 
     ```{r}
@@ -340,7 +344,7 @@ Change the directory:
 
     ```{r}
     marketing <- read.csv("./data/marketing.csv")
-    marketing
+    head(marketing)
     ```
 
 -   If you encounter files with a *semicolon separator* and a decimal comma, use the **read.csv2** or **read_csv2** function.
@@ -471,7 +475,7 @@ df
 #install.packages("dplyr")
 ```
 
-### **Usage:** 
+### **Usage:**
 
 ```{r}
 library(tidyverse)
@@ -500,8 +504,8 @@ names(drinks)
 The functions unique() can also be useful for checking data
 
 ```{r}
-#finding the unique recprds
-unique(drinks)
+#finding the unique records
+head(unique(drinks))
 ```
 
 **Common problems in data:**
@@ -567,7 +571,12 @@ head(drinks)
 drinks <- select(drinks,-country)
 ```
 
-**Practice:** Let's do the following steps on ames housing dataset:
+**Practice1:** Import ufo data to a dataframe called ufo_df
+- find the unique State names 
+- change column names to cty,Colors, Shape, State, TimeZone
+- Create a ufo_sub_df which is a subset of ufo_df with Shape and TimeZone columns
+
+**Practice2:** Let's do the following steps on ames housing dataset:
 
 -   Import it a datadrame called "ames_df"
 
@@ -672,13 +681,13 @@ write.table(ufo_NY, "./output/ufo_NY.txt")
     ```
 
     ```{r}
-    titanic[1:5, 1:2]
+    head(titanic[1:5, 1:2])
 
-    titanic[1:5, c("Name", "Sex")]
+    head(titanic[1:5, c("Name", "Sex")])
     ```
 
 ```{r}
-titanic[1:5, ]
+head(titanic[1:5, ])
 ```
 
 -   We can apply relational expressions using indexing:
@@ -686,7 +695,7 @@ titanic[1:5, ]
 Let's pull out only those rows with age below, say, 30:
 
 ```{r}
-titanic[titanic$Age<30, ]
+head(titanic[titanic$Age<30, ])
 ```
 
 ## Subsetting
@@ -694,20 +703,27 @@ titanic[titanic$Age<30, ]
 Subsetting is used to select a subset of a vector:
 
 ```{r}
-subset(titanic, Age<30)
+head(subset(titanic, Age<30))
 ```
 
 'and' expression:
 
 ```{r}
-subset(titanic, Age<30 & Sex == "female")
+head(subset(titanic, Age<30 & Sex == "female"))
 ```
 
 'or' expression:
 
 ```{r}
-subset(titanic, Age<30 | Age > 60)
+head(subset(titanic, Age<30 | Age > 60))
 ```
+
+**Practice**
+- import ufo data 
+- rename shape reported to shape
+- build a subset by selecting shape equal to RECTANGLE
+- remove the Time column
+- write down the output dataframe to ufo_subset.txt with sep = *
 
 **Extra tips:** There are two functions in the dplyr package that can replace most or all of the extracting that you might otherwise do with indexing and the subset function.
 
@@ -733,7 +749,7 @@ sort(x)
 we use 'order' function to sort the entire data frame by one column?
 
 ```{r}
-titanic[order(titanic$Age, titanic$Sex, decreasing = TRUE), ]
+head(titanic[order(titanic$Age, titanic$Sex, decreasing = TRUE), ])
 ```
 
 **Challenge: what does this do?**
@@ -795,8 +811,6 @@ beer_wine <- merge(beer, wine, by = "country")
 If beer does not have rows for all the country that are present in the wine data frame, then most of them didn't have a matching country in pop\
 If you want to keep all rows regardless, use all = TRUE.
 
-    us <- merge(pop, gdp, by = "year", all = TRUE)
-    dfsumm(us)
 
 **Bonus:** what if the variables you would like to merge by don't have the same name in both data frames?
 
@@ -844,7 +858,7 @@ mean(x, na.rm = TRUE)
 
 Find complete cases in a dataframe:
 
-```{r}
+```{}
 # subset with complete.cases to get complete cases
 ufo <- read.csv("./data/ufo.csv")
 complete.cases(ufo)
@@ -853,7 +867,7 @@ ufo[complete.cases(ufo), ]
 
 or we can remove them:
 
-```{r}
+```{}
 na.omit(ufo)
 ```
 
@@ -894,6 +908,9 @@ print_square <- function(a) {
    }
 }
 ```
+**Practice:**
+- write a function that takes a vector a characters and print 
+-  each member with an " is Awesome!" at the end. Name the function awesome_printer
 
 ## Calling a Function
 
@@ -944,7 +961,9 @@ lmn_cars <- lapply(dt, min)
 smn_cars <- sapply(dt, min)
 lmn_cars
 ```
-
+**Practice**
+- use the titanic dataset
+- use sapply to find the number of unique values in each attribute
 ## 
 
 OPTIONAL 1
