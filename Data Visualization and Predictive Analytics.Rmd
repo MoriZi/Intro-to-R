@@ -66,7 +66,7 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, cache = FAL
 
     ![](images/Capture.jpg){width="1000" height="10"}
 
-### **Lets review the data science lifecycle**
+### **Let's review the data science lifecycle**
 
 ![](images/lifecycle.png)
 
@@ -117,6 +117,8 @@ ufo = read.csv('data/ufo.csv')
 head(ufo)
 ```
 
+Let's work with the date feature:
+
 ```{r}
 #create Year attribute
 library(lubridate) 
@@ -161,8 +163,11 @@ plot(sorted_year_count, type="l")
 #, col="green", lwd=5, xlab="time", ylab="#years")
 ```
 
-```{r}
+Practice: count continent values and draw the plot:
+
+```{r include=FALSE}
 continent_counts <- table(drinks$continent)
+plot(continent_counts, type="l",main="Continent count",xlab= "continent",ylab = "count")
 ```
 
 ```{r}
@@ -170,7 +175,7 @@ continent_counts <- table(drinks$continent)
 
 # For example, ordering by continent below shows a trend where no exists ... 
 #    it would be just as valid to plot the continents in any order.
-plot(continent_counts, type="l",main="Continent count",xlab= "continent",ylab = "count")
+
 
 ```
 
@@ -194,14 +199,14 @@ barplot(continent_counts,xlab="Continents",border = "red", col="yellow")
 
 -   Change the style to something you like!
 
-```{r}
+```{r include=FALSE}
 plot(housing$MEDV, type="l",,main="MEDV",xlab= "continent",ylab = "count",col="blue")
 plot(housing$RM, type="l",,main="RM",xlab= "continent",ylab = "count",col="red")
 ```
 
 ## More charts per plot
 
-```{r}
+```{r include=FALSE}
 plot(housing$MEDV, type="l",,main="MEDV vs RMS",xlab= "MEDV",ylab = "count",col="blue")
 lines(housing$RM, type="l",,main="MEDV vs RMS",xlab= "RM",ylab = "count",col="red")
 ```
@@ -209,8 +214,8 @@ lines(housing$RM, type="l",,main="MEDV vs RMS",xlab= "RM",ylab = "count",col="re
 **Lets use Percent Normalized (MAX)**
 
 ```{r}
-housing$price_percent=housing$MEDV/median(housing$MEDV)*100
-housing$rm_percent=housing$RM/median(housing$RM)*100
+housing$price_percent=housing$MEDV/mean(housing$MEDV)*100
+housing$rm_percent=housing$RM/mean(housing$RM)*100
 head(housing)
 ```
 
@@ -536,6 +541,8 @@ summary(lm_1)
 
 -   So in this case, if there is a house that is 20.5 years old, a is 42.43470 and b is -0.25149, the model predicts (on average) that its price is around 42.43470 + (-0.25149 \* 20.5) = \$37.27916
 
+-   The coefficient Standard Error measures the average amount that the coefficient estimates vary from the actual average value of our response variable (lower number relative to its coefficients)
+
 -   When a regression takes into account two or more predictors to create the linear regression
 
     -   It's called multiple linear regression
@@ -550,11 +557,19 @@ summary(lm_1)
 
         -   Look at the summary and estimation of weights.
 
+        -   t-value: we want it to be far away from zero as this would indicate we could reject the null hypothesis (there is a relationship)
+
         -   Another aspect to pay attention to your linear models is the p-value of the coefficients.
+
+        -   Probability of observing any value equal or larger than t
+
+        -   A small p-value indicates that it is unlikely we will observe a relationship between the predictor and response variables due to chance
 
         -   A p-value indicates whether or not you can reject or accept a hypothesis
 
         -   The hypothesis, in this case, is that the predictor is not meaningful for your model.
+
+        -   Three stars (or asterisks) represent a highly significant p-value
 
         -   The p-value for convenience stores is \< 2e-16. A very small value means that this attribute is probably an excellent addition to your model.
 
@@ -565,12 +580,15 @@ summary(lm_1)
             library(dplyr)
             dat <- select(real_state, X2.house.age
             , Y.house.price.of.unit.area)
-            plot(lm_1)
             ```
 
             ### **Residuals**
 
         -   A good way to test the quality of the fit of the model is to look at the residuals or the differences between the real values and the predicted values
+
+        -   Residuals are essentially the difference between the actual observed response values and the response values that the model predicted.
+
+        -   Degrees of freedom are the number of data points that went into the estimation of the parameters used after taking into account these parameters
 
         -   The red vertical line from the straight line to the observed data value is the residual. ![](images/4_pjp8qf.png){width="421"} The idea in here is that the sum of the residuals is approximately zero or as low as possible
 
@@ -584,11 +602,15 @@ summary(lm_2)
 
 ### **How to test if your linear model has a good fit?**
 
+-   A measure of the linear relationship between our predictor variable and our response / target variable
+
 ![](images/R2.PNG)
 
 This can seem a little bit complicated, but in general, for models that fit the data well, R² is near 1. Models that poorly fit the data have R² near 0
 
-![](images/6.1_tnja1z.png)
+-   Variance found in the response variable can be explained by the predictor variable
+
+-   Adjusted R-squared: more useful when there are multiple varibles. ![](images/6.1_tnja1z.png)
 
 ![](images/7_uyik0q.png)
 
@@ -598,20 +620,58 @@ summary(lm_1)
 
 ### **Analyze which variables should be dropped in the model**
 
-The variables that have the lowest correlation with Y is X1 and X2. We will then try to run the regression without this variable in the model to see what is going to happen.
-
 ```{r}
 RE_data=subset(real_state,select=-c(X6.longitude))
 RE_data$Y.house.price.of.unit.area=log(RE_data$Y.house.price.of.unit.area)
-RE_data
+head(RE_data)
 cor(RE_data)
-plot(RE_data)
 ```
+
+The variables that have the lowest correlation with Y is X1 and X2. We will then try to run the regression without this variable in the model to see what is going to happen.
 
 ### **Rerun the regression without X1 and X2**
 
 ```{r}
 lm_3=lm(RE_data$Y.house.price.of.unit.area~RE_data$X3.distance.to.the.nearest.MRT.station+RE_data$X4.number.of.convenience.stores+RE_data$X5.latitude)
 summary(lm_3)
-plot(lm_3)
+```
+
+# Extra: Decision Tree
+
+Read about decision tree [here](https://www.datacamp.com/community/tutorials/decision-trees-R):
+
+```{r}
+titanic <- read.csv("./data/titanic.csv")
+Survived <- titanic$Survived
+titanic$Survived <- NULL
+```
+
+```{r}
+titanic$Fare[titanic$PassengerId == 1044] <- median(titanic$Fare, na.rm = TRUE)
+
+
+titanic$Age <- sapply(titanic$Age, FUN=function(x) {ifelse(is.na(x),median(titanic$Age, na.rm = TRUE),x)})
+
+table(titanic$Embarked) /sum(titanic$Embarked != "")
+
+# Almost 70% are 'S', then 'S' applied to missing values
+titanic$Embarked[c(62,830)] <- "S"
+
+# Missing Values for Cabin: 1014 records = 77%
+1 - (sum(titanic$Cabin != "")/nrow(titanic))
+titanic$Cabin <- substr(titanic$Cabin,1,1)
+table(titanic$Cabin)
+titanic$Cabin[titanic$Cabin == ""] <- "H"
+```
+
+```{r}
+#install.packages(rpart)
+#install.packages("rpart.plot")
+library(rpart)
+library(rpart.plot)
+
+DT <- rpart(Survived ~ Pclass + Sex + Embarked + Cabin, train, method = "class", cp=0)
+summary(DT)
+printcp(DT)
+rpart.plot(DT, type=1, extra = 102)
 ```
