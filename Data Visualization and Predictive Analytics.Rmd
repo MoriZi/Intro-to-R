@@ -543,6 +543,12 @@ summary(lm_1)
 
 -   The coefficient Standard Error measures the average amount that the coefficient estimates vary from the actual average value of our response variable (lower number relative to its coefficients)
 
+    **Practice:** Build a regression model to estimate the housing price based on the distance to nearest MRT station.
+
+    ```{r}
+    #write your code. 
+    ```
+
 -   When a regression takes into account two or more predictors to create the linear regression
 
     -   It's called multiple linear regression
@@ -590,7 +596,9 @@ summary(lm_1)
 
         -   Degrees of freedom are the number of data points that went into the estimation of the parameters used after taking into account these parameters
 
-        -   The red vertical line from the straight line to the observed data value is the residual. ![](images/4_pjp8qf.png){width="421"} The idea in here is that the sum of the residuals is approximately zero or as low as possible
+        -   The red vertical line from the straight line to the observed data value is the residual. The idea in here is that the sum of the residuals is approximately zero or as low as possible
+
+            ![](images/4_pjp8qf.png){width="421"}
 
 ```{r}
 summary(lm_1)
@@ -636,6 +644,42 @@ lm_3=lm(RE_data$Y.house.price.of.unit.area~RE_data$X3.distance.to.the.nearest.MR
 summary(lm_3)
 ```
 
+### **Prediction**
+
+read test data:
+
+```{r}
+rs_test <- read.csv("./data/Real estate test.csv")
+```
+
+we can use the predict function to estimate the housing price using the models:
+
+```{r}
+predictions <- predict(lm_1, rs_test)
+
+```
+
+```{r}
+# 1. Add predictions 
+pred.int <- predict(lm_1,rs_test, interval = "prediction")
+rs_test <- cbind(rs_test, pred.int)
+# 2. Regression line + confidence intervals
+library("ggplot2")
+p <- ggplot(rs_test, aes(
+  X2.house.age,Y.house.price.of.unit.area)) +
+  geom_point() +
+  stat_smooth(method = lm)
+# 3. Add prediction intervals
+p + geom_line(aes(y = lwr), color = "red", linetype = "dashed")+
+    geom_line(aes(y = upr), color = "red", linetype = "dashed")
+```
+
+We can also calculate different measures such as Mean squared prediction error to find how good the model is:
+
+```{r}
+mean((rs_test$Y.house.price.of.unit.area - pred.int) ^ 2)
+```
+
 # Extra: Decision Tree
 
 Read about decision tree [here](https://www.datacamp.com/community/tutorials/decision-trees-R):
@@ -670,7 +714,7 @@ titanic$Cabin[titanic$Cabin == ""] <- "H"
 library(rpart)
 library(rpart.plot)
 
-DT <- rpart(Survived ~ Pclass + Sex + Embarked + Cabin, train, method = "class", cp=0)
+DT <- rpart(Survived ~ Pclass + Sex + Embarked + Cabin, titanic, method = "class", cp=0)
 summary(DT)
 printcp(DT)
 rpart.plot(DT, type=1, extra = 102)
