@@ -763,7 +763,8 @@ for (val in names) {
 
 load a package
 
-``` {.{.{.{library(\\\\\\\"dplyr\\\\\\\")}}}}
+``` {.{.{.{.{library(\\\\\\\\\\\\\\\"dplyr\\\\\\\\\\\\\\\")}}}}}
+library(dplyr)
 ```
 
 ## The tidyverse packages
@@ -789,7 +790,8 @@ load a package
 
         install.packages("tidyverse")
 
-    ``` {.{.{.{library(tidyverse)}}}}
+    ``` {.{.{.{.{library(tidyverse)}}}}}
+    library(tidyverse)
     ```
 
     ![](images/Capture.jpg){width="1000" height="10"}
