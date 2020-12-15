@@ -4,7 +4,7 @@ output: html_document
 ---
 
 ```{=html}
-<style type="text/css">
+  <style type="text/css">
 
 body{ /* Normal  */
       font-size: 24px;
